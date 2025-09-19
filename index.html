@@ -1,71 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shanyraq Home</title>
-  <link rel="icon" type="image/png" href="/logo.png">
-</head>
-<body>
-<header>
-  <div class="logo">
-    <img src="/logo.png" alt="Shanyraq Home Logo">
-    <h1>Shanyraq Home</h1>
-  </div>
-  <p>Простые условия, лёгкие возможности</p>
-</header>
-
-
-  <main>
-    <!-- Форма-калькулятор -->
-    <form id="calcForm">
-      <label>Ваш ежемесячный доход:
-        <input type="number" name="income" required>
-      </label>
-
-      <label>Какая общая задолженность по кредитам?
-        <input type="number" name="debt" required>
-      </label>
-
-      <label>Ежемесячное погашение по всем кредитам?
-        <input type="number" name="payment" required>
-      </label>
-
-      <label>Были ли ранее просрочки?
-        <select name="delays" required>
-          <option value="">Выберите</option>
-          <option value="Да">Да</option>
-          <option value="Нет">Нет</option>
-        </select>
-      </label>
-
-      <label>Есть ли сейчас просроченные платежи?
-        <select name="currentDelay" required>
-          <option value="">Выберите</option>
-          <option value="Да">Да</option>
-          <option value="Нет">Нет</option>
-        </select>
-      </label>
-
-      <button type="submit">Рассчитать кредит</button>
-    </form>
-
-    <div id="loading" class="loading">Идёт расчёт...</div>
-    <div id="result" class="result"></div>
-
-    <!-- Кнопка WhatsApp -->
-    <div class="container">
-      <button id="whatsappBtn">Оставить заявку в WhatsApp</button>
-    </div>
-  </main>
-
-  <footer>
-    &copy; 2025 Shanyraq Home. Все права защищены.
-  </footer>
-
-  <!-- Подключаем JS -->
-  <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shanyraq Home</title>
+    <link rel="icon" type="image/png" href="/logo.png" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
-
-
