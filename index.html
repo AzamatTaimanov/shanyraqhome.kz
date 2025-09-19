@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shanyraq Home</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f9fa;
+      color: #333;
+    }
+
+    header {
+      background: #0066cc;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 15px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    label {
+      font-size: 0.95rem;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    button {
+      padding: 12px;
+      background: #0066cc;
+      color: #fff;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #004d99;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.2rem;
+      }
+      form {
+        padding: 15px;
+      }
+      button {
+        font-size: 0.9rem;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Shanyraq Home</h1>
+    <p>Простые условия, лёгкие возможности</p>
+  </header>
+
+  <div class="container">
+    <form id="loanForm">
+      <label>Ваш ежемесячный доход:</label>
+      <input type="number" name="income" required>
+
+      <label>Какая общая задолженность по кредитам?</label>
+      <input type="number" name="debt" required>
+
+      <label>Ежемесячное погашение по всем кредитам?</label>
+      <input type="number" name="payment" required>
+
+      <label>Были ли ранее просрочки?</label>
+      <select name="delays" required>
+        <option value="">Выберите</option>
+        <option value="yes">Да</option>
+        <option value="no">Нет</option>
+      </select>
+
+      <label>Есть ли сейчас просроченные платежи?</label>
+      <select name="currentDelay" required>
+        <option value="">Выберите</option>
+        <option value="yes">Да</option>
+        <option value="no">Нет</option>
+      </select>
+
+      <button type="submit">Оставить заявку</button>
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2025 Shanyraq Home. Все права защищены.
+  </footer>
+
+  <script>
+    document.getElementById("loanForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      let message = "Здравствуйте, хочу получить бесплатную консультацию!%0A";
+      const formData = new FormData(this);
+      formData.forEach((value, key) => {
+        message += `${key}: ${value}%0A`;
+      });
+
+      window.location.href = `https://wa.me/77478295825?text=${message}`;
+    });
+  </script>
+</body>
+</html>
