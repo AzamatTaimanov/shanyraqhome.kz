@@ -56,3 +56,5 @@ whatsappBtn.addEventListener("click", () => {
   });
   window.location.href = `https://wa.me/77478295825?text=${message}`;
 });
+
+
