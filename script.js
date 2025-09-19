@@ -1,6 +1,7 @@
 const form = document.getElementById('calcForm');
 const loading = document.getElementById('loading');
 const resultDiv = document.getElementById('result');
+const whatsappBtn = document.getElementById('whatsappBtn');
 
 // Анимация чисел
 function animateValue(id, start, end, duration) {
@@ -9,7 +10,7 @@ function animateValue(id, start, end, duration) {
   let increment = end > start ? 1 : -1;
   let stepTime = Math.abs(Math.floor(duration / range));
   let obj = document.getElementById(id);
-  let timer = setInterval(function() {
+  let timer = setInterval(function () {
     current += increment;
     obj.innerText = current.toLocaleString() + " ₸";
     if (current == end) {
@@ -18,7 +19,7 @@ function animateValue(id, start, end, duration) {
   }, stepTime);
 }
 
-form.addEventListener('submit', function(e) {
+form.addEventListener('submit', function (e) {
   e.preventDefault();
   loading.style.display = 'block';
   resultDiv.style.display = 'none';
@@ -42,7 +43,16 @@ form.addEventListener('submit', function(e) {
     `;
     resultDiv.style.display = 'block';
 
-    // Анимация суммы
     animateValue("calcValue", 0, possible > 0 ? possible : 0, 2000);
   }, 1500);
+});
+
+// WhatsApp заявка
+whatsappBtn.addEventListener("click", () => {
+  let message = "Здравствуйте, хочу получить бесплатную консультацию!%0A";
+  const formData = new FormData(form);
+  formData.forEach((value, key) => {
+    message += `${key}: ${value}%0A`;
+  });
+  window.location.href = `https://wa.me/77478295825?text=${message}`;
 });
