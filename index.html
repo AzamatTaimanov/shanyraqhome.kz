@@ -5,20 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shanyraq Home</title>
 
+  <!-- Favicon для вкладки браузера -->
   <link rel="icon" href="logo.png" type="image/png">
 
   <style>
+    /* Общие стили */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #59bada;
-      color: #333;
+      background: #f0f7fa; /* фон сайта */
+      color: #333;          /* цвет текста по умолчанию */
     }
 
+    /* Шапка сайта */
     header {
-      background: #fff;
-      color: #000;
+      background: #0066cc; /* фон шапки */
+      color: #fff;          /* цвет текста в шапке */
       text-align: center;
       padding: 20px;
     }
@@ -40,43 +43,49 @@
       margin: 0;
     }
 
+    /* Контейнер формы */
     .container {
       max-width: 600px;
-      margin: 0 auto;
+      margin: 20px auto;
       padding: 15px;
     }
 
+    /* Форма */
     form {
       display: flex;
       flex-direction: column;
       gap: 15px;
-      background: #fff;
+      background: #ffffff; /* фон формы */
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      align-items: center; /* центрируем поля */
     }
 
     label {
       font-size: 0.95rem;
       font-weight: bold;
+      align-self: flex-start;
     }
 
-    input, select {
+    input, select, textarea {
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 1rem;
-      width: 100%;
+      width: 500px;       /* уменьшенная ширина полей */
+      display: block;
     }
 
     button {
-      padding: 12px;
+      padding: 12px 20px;
       background: #0066cc;
       color: #fff;
       font-size: 1rem;
       border: none;
       border-radius: 6px;
       cursor: pointer;
+      width: 500px;   
     }
 
     button:hover {
@@ -98,9 +107,8 @@
       form {
         padding: 15px;
       }
-      button {
-        font-size: 0.9rem;
-        padding: 10px;
+      input, select, textarea, button {
+        width: 100%; /* на маленьких экранах растягиваем на 100% */
       }
     }
   </style>
@@ -164,6 +172,8 @@
   </script>
 </body>
 </html>
+
+
 
 
 
