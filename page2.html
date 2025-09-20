@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Shanyraq Home - Шаг 2</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Шаг 2: Заполните анкету</h2>
+    <form action="page3.html" method="get">
+      <input type="hidden" name="iin" value="">
+      <input type="hidden" name="phone" value="">
+
+      <label>Ваш ежемесячный доход:</label>
+      <input type="number" name="income" required>
+
+      <label>Общая задолженность:</label>
+      <input type="number" name="debt" required>
+
+      <label>Ежемесячные платежи:</label>
+      <input type="number" name="payment" required>
+
+      <label>Были ли просрочки?</label>
+      <select name="delays" required>
+        <option value="">Выберите</option>
+        <option value="yes">Да</option>
+        <option value="no">Нет</option>
+      </select>
+
+      <label>Есть ли сейчас просрочки?</label>
+      <select name="currentDelay" required>
+        <option value="">Выберите</option>
+        <option value="yes">Да</option>
+        <option value="no">Нет</option>
+      </select>
+
+      <button type="submit">Рассчитать</button>
+    </form>
+  </div>
+
+  <script>
+    // переносим данные iin и phone с первой страницы
+    const params = new URLSearchParams(window.location.search);
+    document.querySelector('input[name="iin"]').value = params.get("iin") || "";
+    document.querySelector('input[name="phone"]').value = params.get("phone") || "";
+  </script>
+</body>
+</html>

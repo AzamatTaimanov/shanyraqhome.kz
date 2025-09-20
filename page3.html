@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shanyraq Home - Результат заявки</title>
+<link rel="icon" href="logo.png" type="image/png">
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #ffffff, #59bada);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+  }
+  .loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #0066cc;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 2s linear infinite;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .result {
+    display: none;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    max-width: 400px;
+    text-align: left;
+  }
+  .result h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0066cc;
+  }
+  .result table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+  }
+  .result table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  .highlight {
+    font-weight: bold;
+    font-size: 18px;
+    color: #0077cc;
+    text-align: right;
+  }
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader">
+  <div class="spinner"></div>
+  <p>Идёт расчёт максимально доступной суммы кредита...</p>
+</div>
+
+<div class="result" id="result">
+  <h2>Результат расчёта</h2>
+  <table>
+    <tr><td>Ваш доход</td><td id="income">0 ₸</td></tr>
+    <tr><td>Общая задолженность</td><td id="debt">0 ₸</td></tr>
+    <tr><td>Ежемесячные платежи</td><td id="payment">0 ₸</td></tr>
+    <tr><td><b>Максимальная сумма кредита</b></td><td class="highlight" id="maxCredit">0 ₸</td></tr>
+  </table>
+</div>
+
+<script>
+  // Получаем параметры из формы (из URL)
+  const params = new URLSearchParams(window.location.search);
+  const income = parseInt(params.get("income")) || 0;
+  const debt = parseInt(params.get("debt")) || 0;
+  const payment = parseInt(params.get("payment")) || 0;
+
+  // === ФОРМУЛА КРЕДИТА ===
+  // половина дохода = доступный платёж
+  const monthlyPayment = income / 2;
+  // кредит на 60 мес. под ~25% годовых (пример через аннуитет)
+  const months = 60;
+  const annualRate = 0.25;
+  const monthlyRate = annualRate / 12;
+  const possible = Math.floor(
+    (monthlyPayment * (1 - Math.pow(1 + monthlyRate, -months))) / monthlyRate
+  );
+
+  // Функция анимации чисел (2 секунды, плавно)
+  function animateValue(id, start, end, duration) {
+    let obj = document.getElementById(id);
+    let startTimestamp = null;
+
+    function step(timestamp) {
+      if (!startTimestamp) startTimestamp = timestamp;
+      let progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      let value = Math.floor(progress * (end - start) + start);
+      obj.innerText = value.toLocaleString() + " ₸";
+
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    }
+
+    window.requestAnimationFrame(step);
+  }
+
+  // Показываем загрузку 9 сек
+  setTimeout(() => {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("result").style.display = "block";
+
+    // Заполняем таблицу
+    document.getElementById("income").innerText = income.toLocaleString() + " ₸";
+    document.getElementById("debt").innerText = debt.toLocaleString() + " ₸";
+    document.getElementById("payment").innerText = payment.toLocaleString() + " ₸";
+
+    // Анимируем расчёт кредита ровно за 2 сек
+    animateValue("maxCredit", 0, possible > 0 ? possible : 0, 2000);
+  }, 9000);
+</script>
+
+</body>
+</html>

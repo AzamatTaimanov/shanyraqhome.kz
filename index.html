@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Shanyraq Home - Шаг 1</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Шаг 1: Ваши данные</h2>
+    <form action="page2.html" method="get">
+      <label>ИИН:</label>
+      <input type="text" name="iin" required maxlength="12" pattern="[0-9]{12}">
+
+      <label>Телефон:</label>
+      <input type="tel" name="phone" id="phone" placeholder="+7" required>
+
+      <label class="checkbox">
+        <input type="checkbox" required>
+        Я согласен на сбор и обработку персональных данных
+      </label>
+
+      <button type="submit">Далее</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
