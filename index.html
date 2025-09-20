@@ -1,175 +1,184 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shanyraq Home</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shanyraq Home - Калькулятор кредита</title>
+<link rel="icon" href="logo.png" type="image/png">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #ffffff, #59bada);
+    color: #333;
+    text-align: center;
+  }
+  header {
+    background: transparent;
+    color: #000;
+    padding: 20px;
+  }
+  header .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+  header img { width: 50px; height: 50px; }
+  h1 { margin: 0; font-size: 1.5rem; }
 
-  <!-- Favicon для вкладки браузера -->
-  <link rel="icon" href="logo.png" type="image/png">
+  .container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 15px;
+  }
 
-  <style>
-    /* Общие стили */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom, #ffffff, #59bada); /* фон сайта */
-      color: #333;          /* цвет текста по умолчанию */
-    }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    align-items: center;
+  }
 
-    /* Шапка сайта */
-    header {
-      background: transparent; /* фон шапки */
-      color: #000;          /* цвет текста в шапке */
-      text-align: center;
-      padding: 20px;
-    }
+  label { align-self: flex-start; font-weight: bold; }
+  input, select { width: 250px; padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem; }
+  button { width: 250px; padding: 12px; background: #0066cc; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+  button:hover { background: #004d99; }
 
-    header .logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-    }
+  .loading {
+    display: none;
+    font-size: 1.3rem;
+    color: #0066cc;
+    margin: 50px 0;
+  }
 
-    header img {
-      width: 50px;
-      height: 50px;
-    }
+  .result {
+    display: none;
+    margin-top: 20px;
+    background: #e8f5e9;
+    border: 1px solid #c8e6c9;
+    padding: 20px;
+    border-radius: 12px;
+  }
 
-    h1 {
-      font-size: 1.5rem;
-      margin: 0;
-    }
-
-    /* Контейнер формы */
-    .container {
-      max-width: 600px;
-      margin: 20px auto;
-      padding: 15px;
-    }
-
-    /* Форма */
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      background: #ffffff; /* фон формы */
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      align-items: center; /* центрируем поля */
-    }
-
-    label {
-      font-size: 0.95rem;
-      font-weight: bold;
-      align-self: flex-start;
-    }
-
-    input, select, textarea {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-      width: 500px;       /* уменьшенная ширина полей */
-      display: block;
-    }
-
-    button {
-      padding: 12px 20px;
-      background: #0066cc;
-      color: #fff;
-      font-size: 1rem;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      width: 500px;   
-    }
-
-    button:hover {
-      background: #004d99;
-    }
-
-    footer {
-      text-align: center;
-      padding: 15px;
-      font-size: 0.9rem;
-      color: #777;
-    }
-
-    /* Адаптивность */
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 1.2rem;
-      }
-      form {
-        padding: 15px;
-      }
-      input, select, textarea, button {
-        width: 100%; /* на маленьких экранах растягиваем на 100% */
-      }
-    }
-  </style>
+  @media (max-width: 480px) {
+    input, select, button { width: 100%; }
+    h1 { font-size: 1.2rem; }
+  }
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="logo.png" alt="Shanyraq Home">
-      <div>
-        <h1>Shanyraq Home</h1>
-        <p>Простые условия, лёгкие возможности</p>
-      </div>
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Shanyraq Home">
+    <div>
+      <h1>Shanyraq Home</h1>
+      <p>Простые условия, лёгкие возможности</p>
     </div>
-  </header>
-
-  <div class="container">
-    <form id="loanForm">
-      <label>Ваш ежемесячный доход:</label>
-      <input type="number" name="income" required>
-
-      <label>Какая общая задолженность по кредитам?</label>
-      <input type="number" name="debt" required>
-
-      <label>Ежемесячное погашение по всем кредитам?</label>
-      <input type="number" name="payment" required>
-
-      <label>Были ли ранее просрочки?</label>
-      <select name="delays" required>
-        <option value="">Выберите</option>
-        <option value="yes">Да</option>
-        <option value="no">Нет</option>
-      </select>
-
-      <label>Есть ли сейчас просроченные платежи?</label>
-      <select name="currentDelay" required>
-        <option value="">Выберите</option>
-        <option value="yes">Да</option>
-        <option value="no">Нет</option>
-      </select>
-
-      <button type="submit">Оставить заявку</button>
-    </form>
   </div>
+</header>
 
-  <footer>
-    &copy; 2025 Shanyraq Home. Все права защищены.
-  </footer>
+<div class="container">
+  <form id="loanForm">
+    <label>Ваш ежемесячный доход:</label>
+    <input type="number" name="income" required>
 
-  <script>
-    document.getElementById("loanForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+    <label>Какая общая задолженность по кредитам?</label>
+    <input type="number" name="debt" required>
 
-      let message = "Здравствуйте, хочу получить бесплатную консультацию!%0A";
-      const formData = new FormData(this);
-      formData.forEach((value, key) => {
-        message += `${key}: ${value}%0A`;
-      });
+    <label>Ежемесячное погашение по всем кредитам?</label>
+    <input type="number" name="payment" required>
 
-      window.location.href = `https://wa.me/77478295825?text=${message}`;
-    });
-  </script>
+    <label>Были ли ранее просрочки?</label>
+    <select name="delays" required>
+      <option value="">Выберите</option>
+      <option value="Да">Да</option>
+      <option value="Нет">Нет</option>
+    </select>
+
+    <label>Есть ли сейчас просроченные платежи?</label>
+    <select name="currentDelay" required>
+      <option value="">Выберите</option>
+      <option value="Да">Да</option>
+      <option value="Нет">Нет</option>
+    </select>
+
+    <label>Выберите ваш город:</label>
+    <select name="city" required>
+      <option value="">Выберите</option>
+      <option value="Актобе">Актобе</option>
+      <option value="Астана">Астана</option>
+      <option value="Алматы">Алматы</option>
+      <option value="Шымкент">Шымкент</option>
+      <option value="Костанай">Костанай</option>
+    </select>
+
+    <button type="submit">Оставить заявку</button>
+  </form>
+
+  <div class="loading" id="loading">Идёт расчёт, пожалуйста, подождите...</div>
+  <div class="result" id="result"></div>
+</div>
+
+<footer>
+  &copy; 2025 Shanyraq Home. Все права защищены.
+</footer>
+
+<script>
+const form = document.getElementById('loanForm');
+const loading = document.getElementById('loading');
+const resultDiv = document.getElementById('result');
+
+function animateValue(id, start, end, duration) {
+  let range = end - start;
+  let current = start;
+  let increment = end > start ? 1 : -1;
+  let stepTime = Math.abs(Math.floor(duration / range));
+  let obj = document.getElementById(id);
+  let timer = setInterval(function() {
+    current += increment;
+    obj.innerText = current.toLocaleString() + " ₸";
+    if (current == end) clearInterval(timer);
+  }, stepTime);
+}
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  form.style.display = 'none';       // скрываем форму
+  loading.style.display = 'block';    // показываем анимацию загрузки
+  resultDiv.style.display = 'none';
+
+  // через 10–12 секунд показать результат
+  setTimeout(() => {
+    loading.style.display = 'none';
+
+    let income = +form.income.value;
+    let debt = +form.debt.value;
+    let payment = +form.payment.value;
+    let possible = (income - payment) * 12 - debt;
+    possible = possible > 0 ? possible : 0;
+
+    resultDiv.innerHTML = `
+      <h3>Результат расчета</h3>
+      <table border="1" cellpadding="10" style="margin: 0 auto;">
+        <tr><td>Доход</td><td>${income.toLocaleString()} ₸</td></tr>
+        <tr><td>Долг</td><td>${debt.toLocaleString()} ₸</td></tr>
+        <tr><td>Платежи</td><td>${payment.toLocaleString()} ₸</td></tr>
+        <tr><td><b>Максимально доступный кредит</b></td><td id="calcValue"><b>0 ₸</b></td></tr>
+      </table>
+    `;
+    resultDiv.style.display = 'block';
+    animateValue("calcValue", 0, possible, 2000);
+
+  }, 11000); // 11 секунд загрузки
+});
+</script>
 </body>
 </html>
+
 
