@@ -94,6 +94,16 @@
     <label>Ежемесячное погашение по всем кредитам?</label>
     <input type="number" name="payment" required>
 
+     <label>Выберите ваш город:</label>
+    <select name="city" required>
+      <option value="">Выберите</option>
+      <option value="Актобе">Актобе</option>
+      <option value="Астана">Астана</option>
+      <option value="Атырау">Алматы</option>
+      <option value="Уральск">Уральск</option>
+      <option value="Караганда">Караганда</option>
+    </select>
+
     <label>Были ли ранее просрочки?</label>
     <select name="delays" required>
       <option value="">Выберите</option>
@@ -106,16 +116,6 @@
       <option value="">Выберите</option>
       <option value="Да">Да</option>
       <option value="Нет">Нет</option>
-    </select>
-
-    <label>Выберите ваш город:</label>
-    <select name="city" required>
-      <option value="">Выберите</option>
-      <option value="Актобе">Актобе</option>
-      <option value="Астана">Астана</option>
-      <option value="Алматы">Алматы</option>
-      <option value="Шымкент">Шымкент</option>
-      <option value="Костанай">Костанай</option>
     </select>
 
     <button type="submit">Оставить заявку</button>
@@ -180,5 +180,6 @@ form.addEventListener('submit', function(e) {
 </script>
 </body>
 </html>
+
 
 
